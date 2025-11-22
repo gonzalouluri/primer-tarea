@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de Calidad del Aire (AQI)</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            width: 350px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #0066ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #004fcc;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Clasificación de Calidad del Aire (AQI)</h1>
+
+    <div class="card">
+        <p>Ingrese un valor del AQI:</p>
+
+        <input type="number" id="aqiValue" placeholder="Ej: 120">
+        <br>
+        <button onclick="clasificarAQI()">Clasificar</button>
+
+        <div id="resultado" class="resultado" style="display:none;"></div>
+    </div>
+
+    <script>
+        function clasificarAQI() {
+            let aqi = parseInt(document.getElementById("aqiValue").value);
+            let res = document.getElementById("resultado");
+
+            if (isNaN(aqi) || aqi < 0) {
+                res.style.display = "block";
+                res.style.background = "#555";
+                res.textContent = " Valor inválido. Ingrese un número válido.";
+                return;
+            }
+
+            if (aqi <= 50) {
+                res.style.background = "#4CAF50";
+                res.textContent = " Buena";
+            } else if (aqi <= 100) {
+                res.style.background = "#FFEB3B";
+                res.style.color = "#000";
+                res.textContent = " Moderada";
+            } else if (aqi <= 150) {
+                res.style.background = "#FF9800";
+                res.textContent = " Dañina para grupos sensibles";
+            } else if (aqi <= 200) {
+                res.style.background = "#F44336";
+                res.textContent = " Dañina";
+            } else if (aqi <= 300) {
+                res.style.background = "#9C27B0";
+                res.textContent = " Muy dañina";
+            } else {
+                res.style.background = "#000";
+                res.textContent = " Peligrosa";
+            }
+
+            res.style.display = "block";
+            res.style.color = "white";
+        }
+    </script>
+
+</body>
+</html>
